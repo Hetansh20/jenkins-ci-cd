@@ -44,7 +44,7 @@ pipeline {
                     docker run -d \
                       --name ${CONTAINER_NAME} \
                       --restart unless-stopped \
-                      -p 3000:3000 \
+                      -p 4004:3000 \
                       ${IMAGE_NAME}:${BUILD_NUMBER}
                 '''
             }
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 sh '''
                     for i in $(seq 1 15); do
-                        if curl -fsS http://localhost:3000/health; then
+                        if curl -fsS http://localhost:4004/health; then
                             exit 0
                         fi
                         sleep 2
